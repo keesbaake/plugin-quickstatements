@@ -1,5 +1,3 @@
-/* eslint-env mocha */
-
 import '../src/'
 
 import assert from 'assert'
@@ -44,9 +42,10 @@ const apiTests = [
 
 describe('quickstatements', function () {
   describe('api', function () {
-    for (const { name, input, output } of apiTests) {
+    for (const { name, input, output: expectedOutput } of apiTests) {
       it(name, async function () {
-        assert.deepStrictEqual(await plugins.output.format('quickstatements', input), output)
+        const actualOutput = await plugins.output.format('quickstatements', input)
+        assert.deepStrictEqual(actualOutput, expectedOutput)
       })
     }
   })
